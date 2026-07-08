@@ -49,21 +49,44 @@ CREATE TABLE RETAIL_SALES
 - **Null Value Check**: Check for any null values in the dataset and delete records with missing data.
 
 ```sql
-SELECT COUNT(*) FROM RETAIL_SALES;
-SELECT COUNT(DISTINCT customer_id) FROM RETAIL_SALES;
-SELECT DISTINCT category FROM RETAIL_SALES;
-
-SELECT * FROM RETAIL_SALES
-WHERE 
-    sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR 
-    gender IS NULL OR age IS NULL OR category IS NULL OR 
-    quantity IS NULL OR price_per_unit IS NULL OR cogs IS NULL;
-
+ -- DATA CLEANING 
+ SET SQL_SAFE_UPDATES=0;
+ 
 DELETE FROM RETAIL_SALES
-WHERE 
-    sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR 
-    gender IS NULL OR age IS NULL OR category IS NULL OR 
-    quantity IS NULL OR price_per_unit IS NULL OR cogs IS NULL;
+where 
+ transactions_id is null
+ or 
+ sale_date is null
+ or 
+ sale_time is null
+ or
+ customer_id is null
+ or
+ gender is null
+ or
+ age is null
+ or
+ category is null
+ or
+ quantiy is null
+ or
+ price_per_unit is null
+ or
+ cogs is null
+ or
+ total_sale is null
+ ;
+
+-- DATA EXPLORATION 
+-- HOW MANY SALES WE HAVE ?
+SELECT COUNT(total_sale) FROM RETAIL_SALES;
+
+-- HOW MANY UNIQUE CUSTOMERS WE HAVE ?
+SELECT COUNT(DISTINCT customer_id)
+from RETAIL_SALES;
+
+ -- HOW MANY CATEGORIES WE HAVE 
+ SELECT DISTINCT category FROM RETAIL_SALES;
 ```
 
 ### 3. Data Analysis & Findings
